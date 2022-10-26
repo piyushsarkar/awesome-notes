@@ -1,46 +1,24 @@
-import { AddCircleOutlineOutlined, SubjectOutlined } from '@mui/icons-material';
-import {
-  AppBar,
-  Avatar,
-  Box,
-  Drawer,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Toolbar,
-  Typography,
-} from '@mui/material';
+import { AppBar, Avatar, Box, Toolbar, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import Navigation from './Navigation';
 
 const drawerWidth = 240;
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 const Layout = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const mainItems = [
-    {
-      text: 'My Notes',
-      icon: <SubjectOutlined color="primary" />,
-      path: '/',
-    },
-    {
-      text: 'Create Note',
-      icon: <AddCircleOutlineOutlined color="primary" />,
-      path: '/create',
-    },
-  ];
-
   return (
     <Box sx={{ display: 'flex' }}>
       {/* app bar */}
       <AppBar
         sx={{
-          width: `calc(100% - ${drawerWidth}px)`,
+          width: { xs: '100%', sm: `calc(100% - ${drawerWidth}px)` },
           bgcolor: 'background.paper',
           color: 'text.primary',
+          boxShadow: {
+            xs: '0px 2px 4px -1px rgb(0 0 0 / 20%)',
+            sm: 0,
+          },
         }}
         color="default"
         elevation={0}
@@ -60,45 +38,10 @@ const Layout = () => {
         </Toolbar>
       </AppBar>
 
-      {/* side drawer */}
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="permanent"
-        anchor="left"
-      >
-        <Typography variant="h5" sx={{ p: 3 }}>
-          Awesome Notes
-        </Typography>
+      {/* Navigation */}
+      <Navigation drawerWidth={drawerWidth} />
 
-        {/* --- List and links */}
-        {mainItems.map((item) => (
-          <ListItem
-            key={item.text}
-            disablePadding
-            onClick={() => navigate(item.path)}
-            sx={{
-              bgcolor:
-                location.pathname === item.path
-                  ? 'action.selected'
-                  : 'transparent',
-            }}
-          >
-            <ListItemButton>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </Drawer>
-
-      {/* content */}
+      {/* Content */}
       <Box component="main" sx={{ width: '100%', p: 3 }}>
         <Offset />
         <Outlet />

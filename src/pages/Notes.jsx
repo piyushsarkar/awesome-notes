@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import NoteCard from '../components/NoteCard';
 
 import Masonry from '@mui/lab/Masonry';
-import { Box, Container, Grid, Paper } from '@mui/material';
 
 const Notes = () => {
   const [notes, setNotes] = useState([]);
@@ -23,13 +22,11 @@ const Notes = () => {
   };
 
   return (
-    <Container>
-      <Masonry columns={{ xs: 1, md: 2, lg: 3 }} spacing={3}>
-        {notes.map((note) => (
-          <NoteCard note={note} handleDelete={handleDelete} />
-        ))}
-      </Masonry>
-    </Container>
+    <Masonry columns={{ xs: 1, md: 2, lg: 3 }} spacing={3} sx={{ m: 0 }}>
+      {notes.map((note) => (
+        <NoteCard note={note} key={note.id} handleDelete={handleDelete} />
+      ))}
+    </Masonry>
   );
 };
 

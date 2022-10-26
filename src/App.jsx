@@ -1,5 +1,5 @@
 import { CssBaseline, useMediaQuery } from '@mui/material';
-import { purple } from '@mui/material/colors';
+import { deepPurple } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useMemo } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -21,10 +21,13 @@ const lightMode = {
   typography,
   palette: {
     mode: 'light',
-    primary: purple,
+    primary: deepPurple,
     background: {
       default: '#f9f9f9',
       paper: '#fff',
+    },
+    action: {
+      selected: '#f4f4f4',
     },
   },
 };
@@ -33,6 +36,10 @@ const darkMode = {
   typography,
   palette: {
     mode: 'dark',
+    background: {
+      default: '#292929',
+      paper: '#333333',
+    },
   },
 };
 

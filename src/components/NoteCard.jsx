@@ -18,7 +18,7 @@ const categoryColor = {
 
 const NoteCard = ({ note, handleDelete }) => {
   return (
-    <Card elevation={1} key={note.id}>
+    <Card elevation={1}>
       <CardHeader
         avatar={
           <Avatar
